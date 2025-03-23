@@ -10,6 +10,7 @@ add_subdirectory(core/glew)
 add_subdirectory(core/glm)
 
 
-add_executable(${PROJECT_NAME} source/main.cpp)
+add_executable(${PROJECT_NAME} main.cpp)
 
-target_link_libraries(${PROJECT_NAME} glfw libglew_static glm OpenGL::GL)
+target_link_libraries(${PROJECT_NAME} 
+    PUBLIC glfw libglew_static glm OpenGL::GL)
