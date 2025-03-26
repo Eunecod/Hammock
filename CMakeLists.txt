@@ -12,5 +12,5 @@ add_subdirectory(lib)
 add_executable(${PROJECT_NAME} main.cpp)
 
 target_link_libraries(${PROJECT_NAME} 
-    PUBLIC glfw libglew_static glm OpenGL::GL Input
+    PUBLIC glfw libglew_static glm OpenGL::GL Engine Input 
 )
