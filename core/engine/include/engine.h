@@ -1,6 +1,7 @@
 #pragma once
 #include <CommonDefines.h>
 #include <GameObject.h>
+#include <variant>
 
 
 using GameObjectTypes = std::variant<Blank>;

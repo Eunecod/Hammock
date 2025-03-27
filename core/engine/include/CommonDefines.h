@@ -5,6 +5,5 @@
 #include <glm/glm.hpp>
 #include <functional> 
 #include <cstdint>
-#include <variant>
 #include <string>
 #include <memory>
