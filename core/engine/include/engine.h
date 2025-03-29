@@ -1,14 +1,22 @@
 #pragma once
 #include <CommonDefines.h>
 #include <GameObject.h>
-#include <variant>
 
 
-using GameObjectTypes = std::variant<Blank>;
-class Engine {
+class CEngine {
 private:
-    std::vector<std::unique_ptr<GameObject<GameObjectTypes>>> m_vecGameObject;
+    Frame::Window* window { nullptr };
+    std::vector<std::unique_ptr<CGameObject>> game_objects;
 
 public:
-    Engine();
+    CEngine(Frame::Window* _window);
+    ~CEngine();
+
+    void EngineRunning();
+    void AddObject(std::unique_ptr<CGameObject> object);
+
+protected:
+    void Update(float delta_time);
+    void PhysicsUpdate(float delta_time);
+    void Render();
 };
