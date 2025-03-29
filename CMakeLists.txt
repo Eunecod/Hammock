@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(OpenGL REQUIRED)
 add_subdirectory(core)
-add_subdirectory(lib)
 
 
 add_executable(${PROJECT_NAME} main.cpp)
