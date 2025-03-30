@@ -24,14 +24,14 @@ void CEngine::EngineRunning() {
         accumulator += delta_time;
         while (accumulator >= MIN_PHYSICS_STEP) {
             float delta_physics_time = std::min(accumulator, TARGET_PHYSICS_STEP);
-            PhysicsUpdate(delta_physics_time);
+            PhysicsUpdateHandler(delta_physics_time);
             accumulator -= delta_physics_time;
         }
 
-        Update(delta_time);
+        UpdateHandler(delta_time);
 
         const float alpha = accumulator / MIN_PHYSICS_STEP;
-        Render(alpha);
+        RenderHandler(alpha);
     }
 }
 
@@ -39,7 +39,7 @@ void CEngine::AddObject(std::unique_ptr<CGameObject> object) {
     game_objects.emplace_back(std::move(object));
 }
 
-void CEngine::Update(const float delta_time) {
+void CEngine::UpdateHandler(const float delta_time) {
     for (auto& object : game_objects) {
         if (object->GetActive()) {
             object->Update(delta_time);   
@@ -49,7 +49,7 @@ void CEngine::Update(const float delta_time) {
     glfwPollEvents();
 }
 
-void CEngine::PhysicsUpdate(const float delta_time) {
+void CEngine::PhysicsUpdateHandler(const float delta_time) {
     for (auto& object : game_objects) {
         if (object->GetPhysics()) {
             object->PhysicsUpdate(delta_time);   
@@ -57,7 +57,7 @@ void CEngine::PhysicsUpdate(const float delta_time) {
     }
 }
 
-void CEngine::Render(const float alpha) {
+void CEngine::RenderHandler(const float alpha) {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -70,6 +70,6 @@ void CEngine::InputCallback(Frame::Window* window, int key, int scancode, int ac
 
 }
 
-void CEngine::Input() {
+void CEngine::InputHandler() {
 
 }

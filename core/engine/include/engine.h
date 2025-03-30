@@ -18,8 +18,8 @@ public:
     void AddObject(std::unique_ptr<CGameObject> object);
     
 protected:
-    void Update(const float delta_time);
-    void PhysicsUpdate(const float delta_time);
-    void Render(const float alpha);
-    void Input();
+    void UpdateHandler(const float delta_time);
+    void PhysicsUpdateHandler(const float delta_time);
+    void RenderHandler(const float alpha);
+    void InputHandler();
 };
