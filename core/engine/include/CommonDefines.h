@@ -31,6 +31,10 @@ namespace Engine {
     using Quaternion    = glm::quat;
 }
 
+namespace Event {
+    using Input = int;
+}
+
 namespace Frame {
     using Window = GLFWwindow;
 }
