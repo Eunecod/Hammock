@@ -18,12 +18,16 @@ public:
     void Set(const T& value) { property = value; }
 };
 
+struct Transform {
+    Engine::Vector3D    position;
+    Engine::Quaternion  rotation;
+    Engine::Scale3D     scale;
+
+    Transform() : position(0.f, 0.f, 0.f), rotation(1.f, 0.f, 0.f, 0.f), scale(1.f, 1.f, 1.f) { }
+};
+
 class CGameObject : public IGameObject {
-    OBJECT_PROPERTY(Engine::Vector3D, Position, Engine::Vector3D(0.f, 0.f, 0.f));
-    OBJECT_PROPERTY(Engine::Vector3D, Scale, Engine::Vector3D(0.f, 0.f, 0.f));
-    OBJECT_PROPERTY(Engine::Quantarion, Rotation, Engine::Quantarion(1.f, 0.f, 0.f, 0.f));
-    OBJECT_PROPERTY(bool, Active, true);
-    OBJECT_PROPERTY(bool, Physics, true);
+    OBJECT_PROPERTY(Transform, Transform, {});
 
 public:
     CGameObject() = default;
