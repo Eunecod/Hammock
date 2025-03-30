@@ -8,4 +8,5 @@ public:
 
     virtual void Update(const float delta_time) = 0;
     virtual void PhysicsUpdate(const float delta_time) = 0;
+    virtual void Input(Event::Input msg) = 0;
 };
