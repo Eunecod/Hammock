@@ -32,6 +32,8 @@ void CEngine::EngineRunning() {
 
         const float alpha = accumulator / MIN_PHYSICS_STEP;
         RenderHandler(alpha);
+
+        InputHandler();
     }
 }
 
@@ -41,9 +43,7 @@ void CEngine::AddObject(std::unique_ptr<CGameObject> object) {
 
 void CEngine::UpdateHandler(const float delta_time) {
     for (auto& object : game_objects) {
-        if (object->GetActive()) {
-            object->Update(delta_time);   
-        }
+        object->Update(delta_time);   
     }
 
     glfwPollEvents();
@@ -51,18 +51,62 @@ void CEngine::UpdateHandler(const float delta_time) {
 
 void CEngine::PhysicsUpdateHandler(const float delta_time) {
     for (auto& object : game_objects) {
-        if (object->GetPhysics()) {
-            object->PhysicsUpdate(delta_time);   
-        }
+        object->PhysicsUpdate(delta_time);   
     }
 }
 
 void CEngine::RenderHandler(const float alpha) {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    /* Все объекты привести к отрисовки */
+    glEnable(GL_DEPTH_TEST);
 
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+
+    float aspect = (float)800 / (float)600;
+    glFrustum(-0.5f, 0.5f, -0.5f/aspect, 0.5f/aspect, 1.0f, 100.0f);
+    
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    for(const auto& object : game_objects) {
+        glTranslatef(object->GetTransform().position.x, object->GetTransform().position.y, object->GetTransform().position.z);
+        glColor3f(1.0f, 0.5f, 0.0f);
+        
+        glBegin(GL_QUADS);
+            glVertex3f(-1.0f, -1.0f,  1.0f);
+            glVertex3f( 1.0f, -1.0f,  1.0f);
+            glVertex3f( 1.0f,  1.0f,  1.0f);
+            glVertex3f(-1.0f,  1.0f,  1.0f);
+
+            glVertex3f(-1.0f, -1.0f, -1.0f);
+            glVertex3f(-1.0f,  1.0f, -1.0f);
+            glVertex3f( 1.0f,  1.0f, -1.0f);
+            glVertex3f( 1.0f, -1.0f, -1.0f);
+
+            glVertex3f(-1.0f,  1.0f, -1.0f);
+            glVertex3f(-1.0f,  1.0f,  1.0f);
+            glVertex3f( 1.0f,  1.0f,  1.0f);
+            glVertex3f( 1.0f,  1.0f, -1.0f);
+
+            glVertex3f(-1.0f, -1.0f, -1.0f);
+            glVertex3f( 1.0f, -1.0f, -1.0f);
+            glVertex3f( 1.0f, -1.0f,  1.0f);
+            glVertex3f(-1.0f, -1.0f,  1.0f);
+
+            glVertex3f( 1.0f, -1.0f, -1.0f);
+            glVertex3f( 1.0f,  1.0f, -1.0f);
+            glVertex3f( 1.0f,  1.0f,  1.0f);
+            glVertex3f( 1.0f, -1.0f,  1.0f);
+
+            glVertex3f(-1.0f, -1.0f, -1.0f);
+            glVertex3f(-1.0f, -1.0f,  1.0f);
+            glVertex3f(-1.0f,  1.0f,  1.0f);
+            glVertex3f(-1.0f,  1.0f, -1.0f);
+        glEnd();
+    }
+
+    glDisable(GL_DEPTH_TEST);
     glfwSwapBuffers(window);
 }
 
