@@ -28,7 +28,7 @@ constexpr const float MAX_DELTA_TIME    { 0.05f };
 namespace Engine {
     using Vector3D      = glm::vec3;
     using Scale3D       = glm::vec3;
-    using Quantarion    = glm::quat;
+    using Quaternion    = glm::quat;
 }
 
 namespace Frame {
