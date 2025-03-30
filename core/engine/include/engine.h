@@ -12,11 +12,14 @@ public:
     CEngine(Frame::Window* _window);
     ~CEngine();
 
+    static void InputCallback(Frame::Window* window, int key, int scancode, int action, int mods);
+
     void EngineRunning();
     void AddObject(std::unique_ptr<CGameObject> object);
     
 protected:
     void Update(const float delta_time);
     void PhysicsUpdate(const float delta_time);
-    void Render();
+    void Render(const float alpha);
+    void Input();
 };

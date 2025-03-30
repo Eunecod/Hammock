@@ -9,31 +9,29 @@ CEngine::~CEngine() {
 }
 
 void CEngine::EngineRunning() {
+    glfwSwapInterval(1);
+
     Timer::TimePoint prev_time = Timer::Clock::now();
+    float accumulator = 0.f;
 
     while (!glfwWindowShouldClose(window)) {
         Timer::TimePoint current_time = Timer::Clock::now();
         Timer::Duration elapsed = current_time - prev_time;
         prev_time = current_time;
 
-        float delta_time = elapsed.count();
-        if (delta_time > MAX_DELTA_TIME) {
-            delta_time = MAX_DELTA_TIME;
-        }
+        float delta_time = std::min(elapsed.count(), MAX_DELTA_TIME);
         
-        float accumulator = 0.f;
         accumulator += delta_time;
-        
-        while (accumulator >= PHYSICS_STEP) {
-            /* Обновление физики */
-            std::cout << "Update Pysics Engine " << std::endl;
-            PhysicsUpdate(PHYSICS_STEP);
-            accumulator -= PHYSICS_STEP;
+        while (accumulator >= MIN_PHYSICS_STEP) {
+            float delta_physics_time = std::min(accumulator, TARGET_PHYSICS_STEP);
+            PhysicsUpdate(delta_physics_time);
+            accumulator -= delta_physics_time;
         }
 
-        Render();
+        Update(delta_time);
 
-        glfwPollEvents();
+        const float alpha = accumulator / MIN_PHYSICS_STEP;
+        Render(alpha);
     }
 }
 
@@ -47,6 +45,8 @@ void CEngine::Update(const float delta_time) {
             object->Update(delta_time);   
         }
     }
+
+    glfwPollEvents();
 }
 
 void CEngine::PhysicsUpdate(const float delta_time) {
@@ -57,11 +57,19 @@ void CEngine::PhysicsUpdate(const float delta_time) {
     }
 }
 
-void CEngine::Render() {
+void CEngine::Render(const float alpha) {
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
     /* Все объекты привести к отрисовки */
 
     glfwSwapBuffers(window);
+}
+
+void CEngine::InputCallback(Frame::Window* window, int key, int scancode, int action, int mods) {
+
+}
+
+void CEngine::Input() {
+
 }
