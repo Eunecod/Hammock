@@ -20,10 +20,10 @@ void CEngine::EngineRunning() {
         if (delta_time > MAX_DELTA_TIME) {
             delta_time = MAX_DELTA_TIME;
         }
-
+        
         float accumulator = 0.f;
         accumulator += delta_time;
-
+        
         while (accumulator >= PHYSICS_STEP) {
             /* Обновление физики */
             std::cout << "Update Pysics Engine " << std::endl;
@@ -41,7 +41,7 @@ void CEngine::AddObject(std::unique_ptr<CGameObject> object) {
     game_objects.emplace_back(std::move(object));
 }
 
-void CEngine::Update(float delta_time) {
+void CEngine::Update(const float delta_time) {
     for (auto& object : game_objects) {
         if (object->GetActive()) {
             object->Update(delta_time);   
@@ -49,7 +49,7 @@ void CEngine::Update(float delta_time) {
     }
 }
 
-void CEngine::PhysicsUpdate(float delta_time) {
+void CEngine::PhysicsUpdate(const float delta_time) {
     for (auto& object : game_objects) {
         if (object->GetPhysics()) {
             object->PhysicsUpdate(delta_time);   
