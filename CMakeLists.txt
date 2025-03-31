@@ -5,11 +5,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(OpenGL REQUIRED)
+add_subdirectory(third_party)
 add_subdirectory(core)
 
 
 add_executable(${PROJECT_NAME} main.cpp)
 
 target_link_libraries(${PROJECT_NAME} 
-    PUBLIC glfw libglew_static glm OpenGL::GL Engine 
+    PUBLIC OpenGL::GL third_party Window Engine  
 )
