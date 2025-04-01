@@ -1,25 +1,32 @@
 #pragma once
-#include <CommonDefines.h>
-#include <GameObject.h>
+
+#define USE_OPENGL // Временно указывать флаги на компиляции
+#ifdef USE_OPENGL
+    #include <GLFW/glfw3.h>
+#endif // USE_OPENGL
+
+#include <Window.h>
+#include <Common.h>
 
 
-class CEngine {
-private:
-    Frame::Window* window { nullptr };
-    std::vector<std::unique_ptr<CGameObject>> game_objects;
+namespace Hammock {
+
+    class Engine {
+    public:
+        Engine(Window* window);
+        ~Engine();
+
+        void Loop();
     
-public:
-    CEngine(Frame::Window* _window);
-    ~CEngine();
+    private:
+        Window* window { nullptr };
+    };
 
-    static void InputCallback(Frame::Window* window, int key, int scancode, int action, int mods);
+    class Timer {
+    public:
+        inline float Now() const {
+            return static_cast<float>(glfwGetTime());
+        }
+    };
 
-    void EngineRunning();
-    void AddObject(std::unique_ptr<CGameObject> object);
-    
-protected:
-    void UpdateHandler(const float delta_time);
-    void PhysicsUpdateHandler(const float delta_time);
-    void RenderHandler(const float alpha);
-    void InputHandler();
-};
+} // namespace Hammock
