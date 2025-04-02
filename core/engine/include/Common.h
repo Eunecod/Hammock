@@ -1,5 +1,8 @@
 #pragma once 
 
+// stdc++ includes
+#include <stdint.h>
+
 // GLM includes
 #include <glm/glm.hpp>
 #include <glm/gtc/quaternion.hpp>
@@ -18,7 +21,6 @@ constexpr float MAX_DELTA_TIME          = 0.05f;
 namespace Type {
 
     using Vector3D      = glm::vec3;
-    using Scale3D       = glm::vec3;
     using Quaternion    = glm::quat;
 
 } // namespace Type
