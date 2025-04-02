@@ -5,4 +5,4 @@ project(Window)
 add_library(${PROJECT_NAME} STATIC src/Window.cpp)
 
 target_include_directories(${PROJECT_NAME} PUBLIC include)
-target_link_libraries(${PROJECT_NAME} PRIVATE third_party)
+target_link_libraries(${PROJECT_NAME} PRIVATE third_party core)
