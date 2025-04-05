@@ -2,6 +2,11 @@
 
 // stdc++ includes
 #include <stdint.h>
+#include <algorithm> 
+#include <unordered_map>
+#include <set>
+#include <memory>
+#include <typeindex>
 
 // GLM includes
 #include <glm/glm.hpp>
