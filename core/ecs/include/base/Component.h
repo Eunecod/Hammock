@@ -4,6 +4,5 @@
 
 
 struct Component { 
-    Entity entity;
     ~Component() = default;
 };
