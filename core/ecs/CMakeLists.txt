@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-project(ecs)
+project(ECS)
 
 
 add_library(${PROJECT_NAME} INTERFACE)

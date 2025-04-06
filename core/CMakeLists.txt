@@ -5,5 +5,5 @@ add_subdirectory(ecs)
 
 add_library(core INTERFACE)
 target_link_libraries(core INTERFACE
-    Window Engine ecs
+    Window Engine ECS
 )
