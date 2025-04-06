@@ -3,4 +3,4 @@
 #include <Common.h>
 
 
-using Entity = uint64_t;
+using Entity = uint32_t;
