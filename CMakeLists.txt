@@ -12,5 +12,5 @@ add_subdirectory(core)
 add_executable(${PROJECT_NAME} main.cpp)
 
 target_link_libraries(${PROJECT_NAME} 
-    PUBLIC OpenGL::GL third_party Window Engine ecs
+    PUBLIC OpenGL::GL third_party core
 )
