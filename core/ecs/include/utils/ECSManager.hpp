@@ -6,7 +6,6 @@
 #include <base/System.h>
 
 
-
 struct SparseSet {
     static constexpr Entity INVALID_ENTITY = std::numeric_limits<Entity>::max();
 
