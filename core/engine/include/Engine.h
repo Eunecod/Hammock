@@ -6,6 +6,7 @@
 #endif // USE_OPENGL
 
 #include <Window.h>
+#include <Scene.h>
 #include <Common.h>
 
 
@@ -13,13 +14,15 @@ namespace Hammock {
 
     class Engine {
     public:
-        Engine(Window* window);
+        Engine(Window* window, Scene* scene);
         ~Engine();
 
+        void LoadScene(Scene* scene);
         void Loop();
     
     private:
-        Window* window { nullptr };
+        Window* window  { nullptr };
+        Scene* scene    { nullptr };
     };
 
     class Timer {
