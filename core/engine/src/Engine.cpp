@@ -47,5 +47,8 @@ void Hammock::Engine::Loop() {
 
         const float alpha = accumulator / MIN_PHYSICS_STEP;
         // Обновление рендера // alpha
+        if (scene) {
+            scene->Render(alpha, RenderPipline);
+        }
     }
 }
