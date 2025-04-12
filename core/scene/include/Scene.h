@@ -31,6 +31,7 @@ public:
 
     void UpdatePhysics(const float delta_physics_time);
     void Update(const float delta_time);
+    void Render(const float alpha, std::function<void(const float)>& callback_render_pipline);
 
 private:
     ECSManager ecs;

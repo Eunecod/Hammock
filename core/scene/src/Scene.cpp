@@ -12,3 +12,7 @@ void Scene::Update(const float delta_time) {
         system->Update(delta_time);
     }
 }
+
+void Scene::Render(const float alpha, std::function<void(const float)>& callback_render_pipline) {
+    callback_render_pipline(alpha);
+}
