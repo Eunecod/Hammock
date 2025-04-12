@@ -6,6 +6,8 @@
 
 class Scene { 
 public:
+    Scene() = default;
+    
     template <typename T, typename... Args>
     inline T CreateGameObject(Args&&... args) {
         auto object = std::make_unique<T>(ecs, std::forward<Args>(args)...);
@@ -18,11 +20,11 @@ public:
     inline void RegisterSystem(Args&&... args) {
         auto system = std::make_unique<T>(ecs, std::forward<Args>(args)...);
         
-        if (system.mode == System::MODE::BASE) {
+        if (system.type_mode == System::MODE::BASE) {
             systems.emplace_back(std::move(system));
         }
 
-        if (system.mode == System::MODE::PHYSICS) {
+        if (system.type_mode == System::MODE::PHYSICS) {
             physics_systems.emplace_back(std::move(system));
         }
     }
