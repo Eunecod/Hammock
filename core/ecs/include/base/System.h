@@ -12,4 +12,8 @@ public:
 
 protected:
     ECSManager& ecs;
+    enum class MODE : short {
+        BASE = 0,
+        PHYSICS,
+    } type_mode = static_cast<MODE>(0);
 };
