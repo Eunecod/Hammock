@@ -24,7 +24,8 @@ namespace Hammock {
         Window* window  { nullptr };
         Scene* scene    { nullptr };
 
-        std::function<void(const float)> RenderPipline = [](const float alpha) { };
+        std::function<void(const float)> RenderPipline = [](const float alpha) { 
+        };
     };
 
     class Timer {
