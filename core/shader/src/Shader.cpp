@@ -21,7 +21,7 @@ const char* Shader::ReadShaderFile(const char* file_path) {
     return buffer;
 }
 
-GLuint Shader::CompileShader(int gl_type_shader, const char* source) {
+GLuint Shader::CompileShader(GLenum gl_type_shader, const char* source) {
     if (!source) {
         return 0;
     }
